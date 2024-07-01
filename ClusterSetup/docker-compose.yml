@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  redis-n1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis-n1
+    ports:
+      - "6371:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+
+  redis-n2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis-n2
+    ports:
+      - "6372:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+
+  redis-n3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis-n3
+    ports:
+      - "6373:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+
+  redis-n4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis-n4
+    ports:
+      - "6374:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+
+  redis-n5:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis-n5
+    ports:
+      - "6375:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+
+  redis-n6:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis-n6
+    ports:
+      - "6376:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: always
+
+  redis-insight:
+      container_name: redis-insight
+      image: redislabs/redisinsight:1.14.0
+      ports:
+        - 8001:8001
+
+
+# docker exec -it redis-n1 redis-cli --cluster create redis-n1:6379 redis-n2:6379 redis-n3:6379 redis-n4:6379 redis-n5:6379 redis-n6:6379 --cluster-replicas 1
