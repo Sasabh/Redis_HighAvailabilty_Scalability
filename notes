@@ -1,0 +1,4 @@
+redis-cli --cluster add-node <existing_master_ip>:<port> <new_master_ip>:<port> -a <password>
+
+awk -F "," '{print "SET", $1, $2}' data.csv
+cat newData.csv | redis-cli -a abc@123 --pipe
