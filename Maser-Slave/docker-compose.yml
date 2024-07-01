@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  redis-master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: redis_master
+    image: redis-aof-image
+    ports:
+      - "6391:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+
+  redis-slave1:
+    container_name: redis_slave1
+    image: redis-aof-image
+    ports:
+      - "6392:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "--slaveof", "redis_master", "6379", "--masterauth", "abc@123"]
+  
+  redis-slave2:
+    container_name: redis_slave2
+    image: redis-aof-image
+    ports:
+      - "6393:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "--slaveof", "redis_master", "6379", "--masterauth", "abc@123"]
+  
+  redis-slave3:
+    container_name: redis_slave3
+    image: redis-aof-image
+    ports:
+      - "6394:6379"
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "--slaveof", "redis_master", "6379", "--masterauth", "abc@123"]
